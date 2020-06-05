@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pds</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+</head>
+<body>
+
+<style type="text/css">
+    h1 {
+        color:green;
+    }
+    .xyz {
+        background-size: auto;
+        text-align: center;
+        padding-top: 100px;
+    }
+    .btn-circle.btn-sm {
+        width: 30px;
+        height: 30px;
+        padding: 6px 0px;
+        border-radius: 15px;
+        font-size: 8px;
+        text-align: center;
+    }
+    .btn-circle.btn-md {
+        width: 50px;
+        height: 50px;
+        padding: 7px 10px;
+        border-radius: 25px;
+        font-size: 10px;
+        text-align: center;
+    }
+    .btn-circle.btn-xl {
+        width: 70px;
+        height: 70px;
+        padding: 10px 16px;
+        border-radius: 35px;
+        font-size: 12px;
+        text-align: center;
+    }
+</style>
+
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">idCommande</th>
+        <th scope="col">Produit </th>
+        <th scope="col">Avancement Livraison</th>
+        <th scope="col">Date</th>
+        <th scope="col" th:if="${client.type=='admin'}">Modifier</th>
+    </tr>
+
+    </thead>
+    <tbody>
+
+    <tr th:each="pre:${pres}" >
+        <td th:text="${pre.commande.id}"></td>
+        <td>
+            <div style="display: flex">
+                <div>
+                    <img th:src="${pre.produit.image}"style="width: 50px;height:50px;">
+                </div>
+                <div style="margin-top: auto;margin-bottom: auto">
+                    <p style="margin-left: 10px;" th:text="${pre.produit.nom}"></p>
+                </div>
+            </div>
+        </td>
+        <td>
+            <div th:if="${pre.commande.livraison == 'acheter'}" style="display: flex;position: relative" >
+                <div>
+                    <button type="button" class="btn btn-success btn-circle btn-xl" style="position: absolute">Acheté</button>
+                </div>
+                <div style ="width: 100px;margin-top: auto;margin-bottom: auto" class="progress">
+                    <div  class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 90%"></div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-secondary btn-circle btn-xl" style="position: absolute">prepa-<br>ration</button>
+                </div>
+                <div style ="width: 100px;margin-top: auto;margin-bottom: auto" class="progress">
+                    <div  class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-secondary btn-circle btn-xl" style="position: absolute">En cours</button>
+                </div>
+                <div style ="width: 100px;margin-top: auto;margin-bottom: auto" class="progress">
+                    <div  class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-secondary btn-circle btn-xl" >Livrée</button>
+                </div>
+            </div>
+            <div th:if="${pre.commande.livraison == 'prepa'}" style="display: flex;position: relative" >
+                <div>
+                    <button type="button" class="btn btn-success btn-circle btn-xl" style="position: absolute">Acheté</button>
+                </div>
+                <div style ="width: 100px;margin-top: auto;margin-bottom: auto" class="progress">
+                    <div  class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-success btn-circle btn-xl" style="position: absolute">prepa-<br>ration</button>
+                </div>
+                <div style ="width: 100px;margin-top: auto;margin-bottom: auto" class="progress">
+                    <div  class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 90%"></div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-secondary btn-circle btn-xl" style="position: absolute">En cours</button>
+                </div>
+                <div style ="width: 100px;margin-top: auto;margin-bottom: auto" class="progress">
+                    <div  class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-secondary btn-circle btn-xl" >Livrée</button>
+                </div>
+            </div>
+            <div th:if="${pre.commande.livraison == 'encours'}" style="display: flex;position: relative" >
+                <div>
+                    <button type="button" class="btn btn-success btn-circle btn-xl" style="position: absolute">Acheté</button>
+                </div>
+                <div style ="width: 100px;margin-top: auto;margin-bottom: auto" class="progress">
+                    <div  class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-success btn-circle btn-xl" style="position: absolute">prepa-<br>ration</button>
+                </div>
+                <div style ="width: 100px;margin-top: auto;margin-bottom: auto" class="progress">
+                    <div  class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-success btn-circle btn-xl" style="position: absolute">En cours</button>
+                </div>
+                <div style ="width: 100px;margin-top: auto;margin-bottom: auto" class="progress">
+                    <div  class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 90%"></div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-secondary btn-circle btn-xl" >Livrée</button>
+                </div>
+            </div>
+            <div th:if="${pre.commande.livraison == 'livrer'}" style="display: flex;position: relative" >
+                <div>
+                    <button type="button" class="btn btn-success btn-circle btn-xl" style="position: absolute">Acheté</button>
+                </div>
+                <div style ="width: 100px;margin-top: auto;margin-bottom: auto" class="progress">
+                    <div  class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-success btn-circle btn-xl" style="position: absolute">prépa-<br>ration</button>
+                </div>
+                <div style ="width: 100px;margin-top: auto;margin-bottom: auto" class="progress">
+                    <div  class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-success btn-circle btn-xl" style="position: absolute">En cours</button>
+                </div>
+                <div style ="width: 100px;margin-top: auto;margin-bottom: auto" class="progress">
+                    <div  class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-success btn-circle btn-xl" >Livrée</button>
+                </div>
+
+                <div style="margin-left:10px;">
+                    <span>à récuperer </span><br>
+                    <span  th:text="${pre.commande.addresse}"></span>
+                </div>
+            </div>
+
+        </td>
+        <td th:text="${pre.commande.date}">03/02/2019 15h30</td>
+        <td th:if="${client.type=='admin'}">
+            <select th:id="${pre.commande.id+'select'}" class="form-control form-control-sm">
+                <option value="acheter" >Acheté</option>
+                <option value="prepa" >préparation</option>
+                <option value="encours" >En cours</option>
+                <option value="livrer" >Livrée</option>
+            </select><br>
+            <button type="button" th:id="${pre.commande.id+'btn'}"   class="btn btn-warning">
+                Modifier
+            </button>
+            <script type="text/javascript" th:inline="javascript">
+                /*<![CDATA[*/
+
+                document.getElementById(/*[[${pre.commande.id+'btn'}]]*/"myid").onclick = function(){
+                    console.log("clicked");
+                    var formdata = new FormData();
+                    formdata.append("idcommandes", /*[[${pre.commande.id}]]*/"myid");
+                    formdata.append("value", $(/*[[${'#'+pre.commande.id+'select'}]]*/"myid").val());
+                    var ajax = new XMLHttpRequest();
+                    ajax.open("POST", "/changer");
+                    ajax.addEventListener("load", function (e) {
+                        document.location.href="/";
+                    }, false);
+                    ajax.send(formdata);
+                };
+                /*]]>*/
+            </script>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+    <button onclick="window.location.href='/destroy'" type="button" class="btn btn-warning">
+        Se deconnecter
+    </button>
+
+
+
+
+
+</body>
+</html>
